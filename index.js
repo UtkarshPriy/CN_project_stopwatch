@@ -9,15 +9,15 @@ let counter = 0;
 
 let timer = false;
 
-startBtn.addEventListener('click', function () {
+startBtn.addEventListener('click', function () { // to initialize the timer
     timer = true;
     stopWatch();
 
 });
-stopBtn.addEventListener('click', function () {
+stopBtn.addEventListener('click', function () { // to pause the timer
     timer = false;
 });
-resetBtn.addEventListener('click', function () {
+resetBtn.addEventListener('click', function () { // to reset the timer
     hour = 0;
     minute = 0;
     sec = 0;
