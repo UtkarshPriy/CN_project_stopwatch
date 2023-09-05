@@ -1,6 +1,6 @@
-let startBtn = document.getElementById('start');
-let stopBtn = document.getElementById('stop');
-let resetBtn = document.getElementById('reset');
+let startBtn = document.querySelector('#start');
+let stopBtn = document.querySelector('#stop');
+let resetBtn = document.querySelector('#reset');
 
 let hour = 0;
 let minute = 0;
@@ -9,12 +9,12 @@ let counter = 0;
 
 let timer = false;
 
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener('click', function () {
     timer = true;
     stopWatch();
 
 });
-stopBtn.addEventListener('click', () => {
+stopBtn.addEventListener('click', function () {
     timer = false;
 });
 resetBtn.addEventListener('click', function () {
@@ -22,9 +22,9 @@ resetBtn.addEventListener('click', function () {
     minute = 0;
     sec = 0;
     counter = 0;
-    document.getElementById('hr').innerText = '00';
-    document.getElementById('min').innerText = '00';
-    document.getElementById('sec').innerText = '01';
+    document.getElementById('hr').innerHTML = '00:';
+    document.getElementById('min').innerHTML = '00:';
+    document.getElementById('sec').innerHTML = '00:';
 
 })
 
@@ -55,11 +55,11 @@ function stopWatch() {
     let minString = minute;
     let secString = sec;
     if (hour < 10) {
-        hrString = '0' + hour;
+        hrString = '0' + hour + ':';
 
     }
     if (minute < 10) {
-        minString = '0' + minute;
+        minString = '0' + minute + ':';
     }
     if (sec < 10) {
         secString = '0' + sec;
