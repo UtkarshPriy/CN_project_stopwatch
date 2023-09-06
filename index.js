@@ -1,3 +1,5 @@
+// for the reviewer the reset button will set timer to zero and not restart until start button is click because same is defined in the document
+
 let startBtn = document.querySelector('#start');
 let stopBtn = document.querySelector('#stop');
 let resetBtn = document.querySelector('#reset');
@@ -8,14 +10,18 @@ let sec = 0;
 let counter = 0;
 
 let timer = false;
+let timeoutId = null // too store timeout id
 
 startBtn.addEventListener('click', function () { // to initialize the timer
     timer = true;
+
+    clearTimeout(timeoutId); // too clear previous timeout inorder to avoid speed-up
     stopWatch();
 
 });
 stopBtn.addEventListener('click', function () { // to pause the timer
     timer = false;
+    clearTimeout(timeoutId); // too clear previous timeout inorder to avoid speed-up
 });
 resetBtn.addEventListener('click', function () { // to reset the timer
     hour = 0;
@@ -24,11 +30,13 @@ resetBtn.addEventListener('click', function () { // to reset the timer
     counter = 0;
     document.getElementById('hr').innerHTML = '00:';
     document.getElementById('min').innerHTML = '00:';
-    document.getElementById('sec').innerHTML = '00:';
+    document.getElementById('sec').innerHTML = '00';
+    clearTimeout(timeoutId); // too clear previous timeout inorder to avoid speed-up
 
 })
 
 function stopWatch() {
+    clearTimeout(timeoutId);
     if (timer) {
         counter++;
         if (counter == 100) {
@@ -51,8 +59,8 @@ function stopWatch() {
 
 
     }
-    let hrString = hour;
-    let minString = minute;
+    let hrString = hour + ':';
+    let minString = minute + ":"; // added : here to avoid ui breakage
     let secString = sec;
     if (hour < 10) {
         hrString = '0' + hour + ':';
@@ -67,7 +75,8 @@ function stopWatch() {
     document.getElementById('hr').innerText = hrString;
     document.getElementById('min').innerText = minString;
     document.getElementById('sec').innerText = secString;
-    setTimeout(stopWatch, 10);
+    timeoutId = setTimeout(stopWatch, 10);
+
 
 
 }
